@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>events</title>
+  </head>
+  <body style="background-color: #414141">
+    <h2>All Products</h2>
+    <div>
+      <ul id="products">
+        <li>
+          <img width="100px" id="bd3" src="bd_ultra1.webp" alt="pen needles" />
+        </li>
+        <li>
+          <img width="100px" id="4mm" src="bd_ultra3.webp" alt="injection" />
+        </li>
+        <li>
+          <img width="100px" id="boost1" src="boost1.webp" alt="boost 1kg" />
+        </li>
+        <li>
+          <img width="100px" id="boost2" src="boost2.jpeg" alt="stiker" />
+        </li>
+        <li><img width="100px" id="vicks1" src="vicks1.webp" alt="vicks" /></li>
+        <li><img width="100px" id="vicks3" src="vicks3.jpeg" alt="use" /></li>
+        <li>
+          <a style="color: aquamarine" href="https://google.com" id="google"
+            >Google</a
+          >
+        </li>
+      </ul>
+    </div>
+    <script>
+      //   document.getElementById("boost1").onclick = function () {
+      //     alert("boost");
+      //   };
+
+      // attachEvent()
+      // jquery - on
+      // best way to alert
+
+      // type, timestamp, defaultPrevented
+      // target, toElement, srcElement, CurrenTarget
+      // clientX , clientY, screenX, screenY
+      // altKey, CtrlKey, ShiftKey, KeyCode
+
+      //------------------------- Basic -------------------------//
+
+      // event prpogation  (bubbling)
+      document.getElementById("products").addEventListener(
+        "click",
+        function (e) {
+          console.log("click products");
+        },
+        false
+      );
+      document.getElementById("boost1").addEventListener(
+        "click",
+        function (e) {
+          console.log("boost ");
+          e.stopPropgation();
+        },
+        false
+      );
+
+      document.getElementById("google").addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("google click in ul");
+      });
+
+      // --------------------- Advance ---------------------//
+
+      // e
+
+      //   document.querySelector("#products").addEventListener(
+      //     "click",
+      //     function (e) {
+      //       console.log(e);
+      //     },
+      //     false
+      //   );
+
+      // . target
+
+      //   document.querySelector("#products").addEventListener(
+      //     "click",
+      //     function (e) {
+      //       console.log(e.target);
+      //     },
+      //     false
+      //   );
+
+      // .parentNode
+
+      //   document.querySelector("#products").addEventListener(
+      //     "click",
+      //     function (e) {
+      //       console.log(e.target.parentNode);
+      //     },
+      //     false
+      //   );
+
+      // .Remove
+
+      // first way
+
+      document.querySelector("#products").addEventListener(
+        "click",
+        function (e) {
+          console.log(e.target.parentNode);
+          let removeIt = e.target.parentNode;
+          removeIt.remove();
+        },
+        false
+      );
+
+      // second way
+
+      // parentNode .. one problem is a click to (li) hole ul is remove //
+
+      document.querySelector("#products").addEventListener(
+        "click",
+        function (e) {
+          console.log(e.target.parentNode);
+          let removeIt = e.target.parentNode;
+
+          removeIt.parentNode.removeChaild(removeIt);
+        },
+        false
+      );
+
+      // soluation adding by tagname ------- add a stricks checks  // (.tagName -- show - name elements )
+
+      document
+        .querySelector("#products")
+        .addEventListener("click", function (e) {
+          console.log(e.target.tagName);
+          if (e.target.tagName === "IMG") {
+            console.log(e.target.id);
+            let removeIt = e.target.parentNode;
+            removeIt.remove();
+          }
+        });
+    </script>
+  </body>
+</html>

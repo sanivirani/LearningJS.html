@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async</title>
+  </head>
+  <body>
+    <h1>Async projects</h1>
+    <button id="stop">stop</button>
+    <script>
+      /* 
+      
+       1] javascript 
+       -> syncronous
+       -> single threded
+      
+       2] exicution context
+      
+       -> execute one line of code at a time
+       => console.log ->1  {
+       => console.log ->2
+       
+       single thread
+       }
+      
+       [call stack]  [memory heap]
+      
+      
+       ( blocking code )                      vs              ( non blocking code )
+       
+       - block the flow of program                         => does not block execution
+       
+       - read file sync                                
+       
+       new API in javascript => fetch() queue
+      
+      */
+
+      const saySani = function () {
+        console.log("saniivirani");
+      };
+      const changeText = function () {
+        document.querySelector("h1").innerHTML = "how are you doing";
+      };
+
+      const changeMe = setTimeout(changeText, 500);
+
+      document.querySelector("#stop").addEventListener("click", function () {
+        console.log("stopped");
+      });
+    </script>
+  </body>
+</html>
